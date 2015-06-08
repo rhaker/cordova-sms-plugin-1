@@ -8,8 +8,26 @@
 {
     CDVPluginResult* pluginResult = nil;
     NSString* phoneNumber = [command.arguments objectAtIndex:0];
-    NSString* textMessage = [command.arguments objectAtIndex:1];
-    
+    NSString* textMessage = [command.arguments objectAtIndex:1];	    
+	NSString* filePathString = [command.arguments objectAtIndex:2];	
+	
+	if(![MFMessageComposeViewController canSendAttachments]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice"
+                                                        message:@"Update to at least ios7 to use this feature."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil
+                              ];
+        [alert show];
+        return;
+    }
+	
+	if ([filePathString isEqualToString:@"noFile"]) {
+		// do nothing, no attachment
+	} else {
+		NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:filePathString];
+	}
+	
     self.callbackID = command.callbackId;
     
     if (![MFMessageComposeViewController canSendText]) {
@@ -34,7 +52,11 @@
     
     [composeViewController setBody:textMessage];
     [composeViewController setRecipients:recipients];
-    
+	if ([filePathString isEqualToString:@"noFile"]) {
+		// do nothing, no attachment
+	} else {
+		[composeViewController addAttachmentURL:fileURL withAlternateFilename:nil];
+	}    
     [self.viewController presentViewController:composeViewController animated:YES completion:nil];
 }
 
