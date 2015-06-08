@@ -32,7 +32,7 @@ This plugin allows you to send SMS message for ios with attachments. Here is an 
 	}, function(error) {
 						
 			// try to send email if text fails
-			alert("success");
+			alert("error");
 	});
 	
 As you notice you just need to call *sms.sendMessage(messageInfo, successCallback, failureCallback)*:
