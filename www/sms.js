@@ -15,7 +15,8 @@ smsExport.sendMessage = function(messageInfo, successCallback, errorCallback) {
            
     var phoneNumber = messageInfo.phoneNumber;
     var textMessage = messageInfo.textMessage || "Default Text from SMS plugin";
-           
+	var audioFilePath = messageInfo.audioFilePath;
+	 
     if (! phoneNumber) {
         console.log("Missing Phone Number");
     
@@ -29,7 +30,7 @@ smsExport.sendMessage = function(messageInfo, successCallback, errorCallback) {
         return;
     }
            
-    cordova.exec(successCallback, errorCallback, "Sms", "sendMessage", [phoneNumber, textMessage]);
+    cordova.exec(successCallback, errorCallback, "Sms", "sendMessage", [phoneNumber, textMessage, audioFilePath]);
 };
 
 module.exports = smsExport;
