@@ -1,3 +1,11 @@
+PLUGIN: CORDOVA SMS WITH ATTACHMENTS (ios only)
+
+This plugin was forked from https://github.com/hazems/cordova-sms-plugin. For basic usage without attachments, see that repo.
+
+This plugin is for ios only. For android sms with attachments, see my other github repo.
+
+The javascript uses the cordova file plugin (https://github.com/apache/cordova-plugin-file) to set the attachment path.
+
 Notice
 ====================
 This plugin is one of the examples of the ["JavaScript Mobile Application Development"](https://www.packtpub.com/web-development/javascript-native-mobile-apps-development) book which can be reached at: <br> 
@@ -6,18 +14,25 @@ This plugin is one of the examples of the ["JavaScript Mobile Application Develo
 
 Sms Custom Cordova Plugin:
 ====================
-This plugin allows you to send SMS message to a specific phone number for Android, iOS and Windows Platform 8. Here is an example below:
+This plugin allows you to send SMS message for ios with attachments. Here is an example below:
 
-
+	// use ios plugin with attachment					
+	var audioPath = cordova.file.tempDirectory + "fileAudio.wav";					
+	var contactPhoneNumber = "12221231234";
 	var messageInfo = {
-		phoneNumber: "xxxxxxxxxx",
-		textMessage: "This is a test message"
+				phoneNumber: contactPhoneNumber,
+				textMessage: "I recorded a message for you.",
+				audioFilePath: audioPath // set audioPath to "noFile" to skip attachment
 	};
-	
+
 	sms.sendMessage(messageInfo, function(message) {
-		console.log("success: " + message);
+						
+			// on text view dismissal, back to screen)					
+						
 	}, function(error) {
-		console.log("code: " + error.code + ", message: " + error.message);
+						
+			// try to send email if text fails
+			alert("success");
 	});
 	
 As you notice you just need to call *sms.sendMessage(messageInfo, successCallback, failureCallback)*:
@@ -30,12 +45,7 @@ Installing the plugin
 ---
 In order to install the plugin you can simply use the following Cordova CLI command: 
 	
-	cordova plugin add https://github.com/hazems/cordova-sms-plugin.git
-	
-or
-
-	cordova plugin add com.jsmobile.plugins.sms
-
+	cordova plugin add https://github.com/rhaker/cordova-sms-plugin-1.git
 
 Important Note
 ---
