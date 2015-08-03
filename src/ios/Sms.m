@@ -22,11 +22,7 @@
         return;
     }
 	
-	if ([filePathString isEqualToString:@"noFile"]) {
-		// do nothing, no attachment
-	} else {
-		NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:filePathString];
-	}
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:filePathString];
 	
     self.callbackID = command.callbackId;
     
